@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import FinancialForm from './components/FinancialForm';
+import Result from './components/Result';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+    const [resultData, setResultData] = useState('');
+
+    const handleFormSubmit = (formData) => {
+        const { company, startDate, endDate, portfolioValue, confidence } = formData;
+
+        // Simulate API call with mock data
+        // Replace with your actual API call
+        const mockResult = `Company: ${company}\nStart Date: ${startDate}\nEnd Date: ${endDate}\nPortfolio Value: $${portfolioValue}\nConfidence Level: ${confidence}%\n\nMock VaR Calculation Result: 0.1234`;
+
+        // Update resultData state with mock result
+        setResultData(mockResult);
+    };
+
+    return (
+        <div>
+            <FinancialForm onSubmit={handleFormSubmit} />
+            {resultData && <Result data={resultData} />}
+        </div>
+    );
+};
 
 export default App;
